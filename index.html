@@ -226,6 +226,33 @@
       max-width: 860px;
     }
 
+    /* TEACHING */
+    .courses-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .course-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .course-code {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--accent-light);
+      white-space: nowrap;
+      min-width: 72px;
+    }
+    .course-title { font-size: 0.9rem; color: #ccc; }
+    .course-level {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
     /* FOOTER */
     footer {
       text-align: center;
@@ -243,6 +270,7 @@
     <a href="#hero" class="nav-logo">Afsane Rahbar</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#teaching">Teaching</a></li>
       <li><a href="#projects">Work</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -280,7 +308,8 @@
     <h2>A little about me</h2>
     <div class="about-grid">
       <div class="about-photo">
-        <img src="pic.jpg" alt="Afsane Rahbar" />
+        <!-- Replace with your photo: <img src="photo.jpg" alt="Afsane Rahbar" /> -->
+        Your photo here
       </div>
       <div>
         <p>
@@ -294,6 +323,41 @@
           I also love going to the theater and concerts.
         </p>
         <a href="#contact" class="btn btn-outline" style="margin-top:1rem; display:inline-block;">Let's talk →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- TEACHING -->
+  <section id="teaching">
+    <p class="section-label">Duke University</p>
+    <h2>Courses taught</h2>
+    <div class="courses-list">
+      <div class="course-row">
+        <span class="course-code">ECE 651</span>
+        <span class="course-title">Software Engineering</span>
+        <span class="course-level">Graduate</span>
+      </div>
+      <div class="course-row">
+        <span class="course-code">ECE 590</span>
+        <span class="course-title">Theory and Practice of Algorithms</span>
+        <span class="course-level">Graduate</span>
+      </div>
+      <div class="course-row">
+        <span class="course-code">ECE 650</span>
+        <span class="course-title">Systems Programming and Engineering</span>
+        <span class="course-level">Graduate</span>
+      </div>
+      <div class="course-row">
+        <span class="course-code">ECE 351</span>
+        <span class="course-title">Software Engineering</span>
+        <span class="course-level">Undergraduate</span>
+      </div>
+      <div class="course-row">
+        <span class="course-code">ECE 551</span>
+        <span class="course-title">Programming, Data Structures, and Algorithms in C++</span>
+        <span class="course-level">Undergraduate</span>
       </div>
     </div>
   </section>
