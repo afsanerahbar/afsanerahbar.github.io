@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Afsane Rahbar</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --accent: #ba7517;
+      --accent-light: #ef9f27;
+      --text: #e8e8e8;
+      --muted: #888;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    section:first-of-type { padding-top: 8rem; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; }
+    h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; }
+    p { color: #bbb; margin-bottom: 1rem; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 6rem;
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--muted);
+      margin-top: 1rem;
+      max-width: 720px;
+    }
+    .hero-tagline-sub {
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 0.75rem;
+      max-width: 720px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #854f0b; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent-light); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      overflow: hidden;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+    }
+    .skill-card h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-light); margin-bottom: 0.6rem; }
+    .skill-card p { color: #aaa; font-size: 0.9rem; margin: 0; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .project-card:hover { border-color: var(--accent); }
+    .project-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .project-card h3 { font-size: 1.05rem; color: var(--text); margin: 0; }
+    .project-meta { font-size: 0.78rem; color: var(--muted); white-space: nowrap; margin-top: 0.1rem; }
+    .project-card p { font-size: 0.9rem; color: #aaa; margin: 0 0 1rem 0; line-height: 1.65; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .project-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      background: rgba(186,117,23,0.15);
+      color: var(--accent-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      border: 1px solid rgba(186,117,23,0.3);
+    }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      max-width: 560px;
+    }
+    .contact-box h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .contact-box p { font-size: 0.95rem; color: var(--muted); }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* DIVIDER */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 auto;
+      max-width: 860px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Afsane Rahbar</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="section-label">Hello, I'm</p>
+    <h1>Afsane Rahbar</h1>
+    <p class="hero-tagline">
+      Computer scientist, software engineer, and educator at Duke University in Durham, NC —
+      specializing in hardware-software co-design, compiler-based performance optimization,
+      and high-performance computing at datacenter scale, with 10+ years building
+      production-quality tools and infrastructure in C, C++, Python, and Java.
+    </p>
+    <p class="hero-tagline-sub">
+      Core expertise in distributed systems, compiler construction, HPC networking, and
+      low-level systems programming: memory hierarchy, concurrency, OS internals, and
+      ISA-level architecture. Delivered 6&times; throughput improvement via a novel optical
+      multicast architecture and a 40% reduction in reconfiguration overhead through
+      automated compiler-driven network optimization.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About Me</p>
+    <h2>A little about me</h2>
+    <div class="about-grid">
+      <div class="about-photo">
+        <!-- Replace with your photo: <img src="photo.jpg" alt="Afsane Rahbar" /> -->
+        Your photo here
+      </div>
+      <div>
+        <p>
+          I earned my Ph.D. from Rice University's Computer Science Department, where I was a
+          member of Eugene Ng's BOLD (Big Data and Optical Lightpaths Driven) Lab
+          and Moshe Vardi's LAPIS (Logic and Algorithms for Programming Intelligent Systems) Group.
+          I enjoy building iOS applications for personal use with Claude and Cursor.
+        </p>
+        <p>
+          Outside of work, I boulder, horseback ride, swim, and practice Krav Maga.
+          I also love going to the theater and concerts.
+        </p>
+        <a href="#contact" class="btn btn-outline" style="margin-top:1rem; display:inline-block;">Let's talk →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Work</p>
+    <h2>Projects & work</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <h3>Shufflecast — High-Performance Optical Multicast Architecture</h3>
+          <span class="project-meta">Rice University · 2018–2020</span>
+        </div>
+        <p>
+          Designed an edge-restricted optical architecture that physically segregates multicast and
+          unicast traffic, connecting ToR switches via passive optical splitters to deliver
+          physical-layer multicast with no core resource consumption, no extra rack space, and
+          sublinear latency growth. Built and evaluated a complete prototype across LDA, TPC-H,
+          and Paxos workloads — achieving <strong>6.04×–52.1×</strong> speedup in multicast throughput
+          over MPI, up to <strong>6.24×</strong> over state-of-the-art, and a <strong>43.1%</strong>
+          application-level runtime improvement.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">C / C++</span>
+          <span class="project-tag">Optical Networking</span>
+          <span class="project-tag">MPI</span>
+          <span class="project-tag">HPC</span>
+          <span class="project-tag">NS3</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <h3>Compiler-Driven Network Optimization for HPC Applications</h3>
+          <span class="project-meta">Rice University · 2020–2022</span>
+        </div>
+        <p>
+          Designed an end-to-end automation pipeline that eliminates the expert burden of manually
+          tuning reconfigurable datacenter networks. Extended the ROSE Compiler Framework (C++) to
+          detect oscillating MPI communication patterns via CFG and dataflow analysis, mapped each
+          pattern to optimal server placement, and injected reconfiguration code via source-to-source
+          transformations — <strong>reducing application runtime by 40%</strong> with zero user
+          expertise or manual code modification required.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">C++</span>
+          <span class="project-tag">ROSE Compiler</span>
+          <span class="project-tag">MPI</span>
+          <span class="project-tag">Static Analysis</span>
+          <span class="project-tag">Datacenter Networks</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <h3>Automated Proof Mining &amp; Synthesis for Program Verification</h3>
+          <span class="project-meta">Rice University · 2015–2018</span>
+        </div>
+        <p>
+          Implemented a proof mining system in Dafny/Z3 to extract verification patterns from
+          existing verified programs, then extended Frama-C to synthesize correctness proofs via
+          automated theorem proving and invariant generation. Significantly reduced manual
+          verification effort by learning reusable proof strategies from corpora — applicable to
+          validating correctness of latency-critical software components.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Dafny</span>
+          <span class="project-tag">Z3</span>
+          <span class="project-tag">Frama-C</span>
+          <span class="project-tag">Coq</span>
+          <span class="project-tag">Formal Verification</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <h3>FitSync — Concurrent Multi-Platform Sync Engine</h3>
+          <span class="project-meta">Personal Project · 2026–Present</span>
+        </div>
+        <p>
+          Built a concurrent fan-out sync engine using Swift async/await with a
+          <em>SyncOrchestrator</em> that dispatches to multiple platform-specific API services in
+          parallel. Integrated OAuth 2.0 flows with encrypted token storage, architected a unified
+          data model that translates a single input into multiple proprietary third-party formats,
+          and added background scheduling with end-to-end integration tests.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">async/await</span>
+          <span class="project-tag">OAuth 2.0</span>
+          <span class="project-tag">iOS</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Expertise</p>
+    <h2>Skills & tools</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h4>Programming Languages</h4>
+        <p>C, C++, Python, Java, Bash/Shell Scripting, Assembly (MIPS, x86)</p>
+      </div>
+      <div class="skill-card">
+        <h4>Systems &amp; Infrastructure</h4>
+        <p>Linux/Unix, Git/GitHub, CI/CD Pipelines, SQL, MySQL, PostgreSQL, MPI, ROSE Compiler Framework, Apache Spark, ZooKeeper, NS3</p>
+      </div>
+      <div class="skill-card">
+        <h4>Domains</h4>
+        <p>High-Performance Computing, Low-Latency Distributed Systems, Datacenter Networks, Compiler Construction, Concurrency &amp; OS Design, Static Analysis</p>
+      </div>
+      <div class="skill-card">
+        <h4>Formal Methods</h4>
+        <p>Dafny, Z3, Frama-C, Coq</p>
+      </div>
+      <div class="skill-card">
+        <h4>Dev Tools</h4>
+        <p>GitHub Copilot, Cursor, Claude API, Vim, LaTeX</p>
+      </div>
+      <div class="skill-card">
+        <h4>Spoken Languages</h4>
+        <p>French &amp; Farsi/Persian (bilingual, native), English (fluent)</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CONTACT -->
+  <section id="contact" style="display:flex; justify-content:center;">
+    <div class="contact-box">
+      <p class="section-label" style="text-align:center;">Contact</p>
+      <h3>Let's work together</h3>
+      <p>Have a project in mind or just want to say hi? My inbox is always open.</p>
+      <div class="contact-links">
+        <a href="mailto:afsanerahbar@gmail.com" class="btn btn-primary">Email me</a>
+        <a href="https://www.linkedin.com/in/afsaneh-rahbar-b66b94/" class="btn btn-outline" target="_blank">LinkedIn</a>
+        <a href="https://github.com/afsanerahbar" class="btn btn-outline" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Afsane Rahbar &mdash; Built with GitHub Pages
+  </footer>
+
+</body>
+</html>
